@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="sa.css">
+  <style>
+    .form-box {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .background {
+      background-color: black;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .error-message {
+      color: red;
+      margin-top: -10px;
+      font-size: 0.9em;
+      display: none;
+    }
+    .success-message {
+      color: green;
+      margin-top: -10px;
+      font-size: 0.9em;
+      display: none;
+    }
+    .forget label::before,
+    .forget label::after {
+      background-color: #ffffff;
+    }
+  </style>
+  <title>SharkNet Mining</title>
+</head>
+<body>
+    <div class="background"></div>
+    <section>
+        <div class="form-box">
+            <div class="content" id="content">
+                <form>
+                    <h2>Login</h2>
+                    <div class="inputbox">
+                
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                         <input type="text" id="licenseKeyInput" onkeydown="handleKeyPress(event)" autocomplete="off">
+                        <label for="">License Key:</label>
+                    </div>
+                    <div class="forget">
+                        <label for=""><input type="checkbox">Remember Me</label>
+                        <div class="error-message" id="errorMessage">Invalid License Key</div>
+                        <div class="success-message" id="successMessage">Welcome...</div>
+                    </div>
+                    <button type="button" onclick="checkLicenseKey()">Login</button>
+                    <div class="register">
+                        <p>Don't have a license key? <a href="https://discord.gg/sharknet" target="_blank"> <br> Get a license key</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+          var background = document.querySelector('.background');
+          var formBox = document.querySelector('.form-box');
+          var content = document.getElementById('content');
+          
+          setTimeout(function() {
+            background.style.opacity = "0"; 
+            formBox.style.opacity = "1"; 
+            content.style.opacity = "1"; 
+          }, 500); 
+        });
+        
+        function checkLicenseKey() {
+            var licenseKey = document.getElementById("licenseKeyInput").value;
+            var errorMessage = document.getElementById("errorMessage");
+            var successMessage = document.getElementById("successMessage");
+            
+            if (licenseKey === "Nessybaba123") {
+                successMessage.style.display = "block"; 
+                successMessage.style.opacity = "1"; 
+                successMessage.style.color = "green"; 
+                errorMessage.style.display = "none"; 
+                errorMessage.style.opacity = "0"; 
+
+                var content = document.getElementById("content");
+                content.style.borderColor = "green"; 
+
+                setTimeout(function() {
+                    var background = document.querySelector('.background');
+                    background.style.opacity = "0"; 
+                    var formBox = document.querySelector('.form-box');
+                    formBox.style.opacity = "0"; 
+
+                    setTimeout(function() {
+                        window.location.href = "walletkey-3210979ewq9770210737921321709321fdfds32132132132132179493219392197397219321932139129838912732190721904732743290434932"; 
+                    }, 500); 
+                }, 2000); 
+            } else {
+                errorMessage.style.display = "block"; 
+                errorMessage.style.opacity = "1"; 
+                errorMessage.style.color = "red"; 
+                
+                successMessage.style.display = "none"; 
+                successMessage.style.opacity = "0"; 
+                
+                var content = document.getElementById("content");
+                content.style.borderColor = "red"; 
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault(); 
+                checkLicenseKey(); 
+            }
+        }
+    </script>     
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

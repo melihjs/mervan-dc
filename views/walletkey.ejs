@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="walletkey.css">
+  <style>
+    .form-value {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .redirect {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      animation: fadeOut 2s 1s forwards;
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
+  <title>SharkNet Mining</title>
+</head>
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value" id="formValue">
+                <form action="">
+                    <h2>Welcome</h2>
+                    <div class="inputbox">
+                
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="text" id="walletAddressInput" oninput="checkInput()" autocomplete="off">
+                        <label for="">Ethereum Wallet Address (ERC-20):</label>
+                    </div>
+                    <div class="forget">
+                        
+                    </div>
+                    <button type="submit" formaction="/" id="startButton" onclick="animateTransition(event)" disabled>Start</button>
+                    <div class="error-message" id="errorMessage">Please enter a valid wallet address.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+          var formValue = document.getElementById("formValue");
+          formValue.style.opacity = "1"; 
+
+          
+        });
+
+        function animateTransition(event) {
+          event.preventDefault(); 
+
+          var walletAddressInput = document.getElementById("walletAddressInput");
+          var errorMessage = document.getElementById("errorMessage");
+
+          if (walletAddressInput.value.length < 32) {
+            errorMessage.style.display = "block"; 
+          } else {
+            var formValue = document.getElementById("formValue");
+            var startButton = document.getElementById("startButton");
+
+            formValue.style.opacity = "0"; 
+
+            setTimeout(function() {
+              startButton.classList.add("redirect"); 
+              setTimeout(function() {
+                window.location.href = "/miner-3210979ewq9770210737921321709321fdfds32132132132132179493219392197397219321932139129838912732190721904732743290434932"; 
+              }, 2000); 
+            }, 500); 
+          }
+        }
+
+        function checkInput() {
+          var walletAddressInput = document.getElementById("walletAddressInput");
+          var startButton = document.getElementById("startButton");
+          var errorMessage = document.getElementById("errorMessage");
+
+          if (walletAddressInput.value.trim() !== "") {
+            startButton.disabled = false; 
+            errorMessage.style.display = "none"; 
+          } else {
+            startButton.disabled = true; 
+            errorMessage.style.display = "none"; 
+          }
+        }
+    </script>     
+</body>
+</html>

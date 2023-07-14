@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+    <title>SharkNet Premium (Balance = 0.00000ETH ~ 000,00 USD)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+        body {
+            background-color: black;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .message {
+            color: #FFFFFF;
+        }
+
+        .mining-message {
+            color: #FFFF00;
+        }
+
+        .cracked-message {
+            color: #ADD8E6;
+        }
+
+        .success-message {
+            color: #00FF00;
+        }
+
+        .info-message {
+            color: #008000;
+        }
+
+        .transfer-message {
+            color: #FFFFFF;
+        }
+
+        .private-key {
+            color: #FF0000;
+        }
+
+        .ethereum-address {
+            color: #FF0000;
+        }
+
+        .not-found {
+            color: #FFFFFF;
+        }
+
+        .wallet-address {
+            color: #00FF00;
+        }
+
+        .scroll-message {
+            color: #FF00FF;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function generatePrivateKey() {
+            var privateKey = Array.from(crypto.getRandomValues(new Uint8Array(32))).map(byte => byte.toString(16).padStart(2, '0')).join('');
+            return privateKey;
+        }
+
+        function generateEthereumAddress() {
+            var address = "0x" + Array.from(crypto.getRandomValues(new Uint8Array(15))).map(byte => byte.toString(16).padStart(2, '0')).join('');
+            return address;
+        }
+
+        function displayMessage(message, className, delay = 1000) {
+            var output = document.getElementById('output');
+            var span = document.createElement('span');
+            span.className = className;
+            span.textContent = message;
+
+            output.appendChild(span);
+            output.appendChild(document.createElement('br'));
+            output.scrollTop = output.scrollHeight;
+
+            if (className === 'mining-message') {
+                setTimeout(function() {
+                    continuing = false; 
+                }, 120000);
+            }
+
+            setTimeout(function() {
+                span.parentNode.removeChild(span);
+                if (className === 'mining-message') {
+                    continuing = true; 
+                }
+            }, delay);
+
+            if (output.childElementCount > 0) {
+                output.removeChild(output.firstChild);
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function mineEth() {
+            var continuing = true;
+            while (continuing) {
+                await sleep(1000);
+                var ranInt = Math.floor(Math.random() * 501);
+                if (ranInt <= 1) {
+                    var randomBTC = Math.floor(Math.random() * 101) / 100;
+                    displayMessage("", "scroll-message");
+                    await sleep(1000);
+                    displayMessage("(+) > Mining Completed! / 0.49422ETH ($985.80) Cracked!", "mining-message", 50000);
+                    displayMessage("(/) All cracked Ethereum transferred to SharkNet main wallet!", "cracked-message", 50000);
+                    displayMessage("(=>) Once the taxes have been deducted, they will be transferred to your wallet.", "transfer-message", 50000);
+                    await sleep(100000);
+                } else {
+                    displayMessage("(-) > PRIVATE KEY = " + generatePrivateKey(), "private-key");
+                    displayMessage("(/) Connected To MyEtherWallet                                                    | = NOT FOUND ($0.00000)", "info-message");
+                    displayMessage("(+) > WALLET ADDRESS = " + generateEthereumAddress(), "ethereum-address");
+                    
+                }
+            }
+        }
+
+        mineEth();
+    </script>
+</body>
+</html>
